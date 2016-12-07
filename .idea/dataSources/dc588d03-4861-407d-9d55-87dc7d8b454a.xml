@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="dbChattingRoom@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="dbchattingroom">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="dbcontracts"/>
+    <schema id="4" parent="1" name="information_schema"/>
+    <schema id="5" parent="1" name="mvc_study"/>
+    <schema id="6" parent="1" name="mysql"/>
+    <schema id="7" parent="1" name="performance_schema"/>
+    <schema id="8" parent="1" name="phpmyadmin"/>
+    <schema id="9" parent="1" name="test"/>
+    <schema id="10" parent="1" name="dbcustomermanager"/>
+    <schema id="11" parent="1" name="dbstudentcourse"/>
+    <schema id="12" parent="1" name="dbusermanager"/>
+    <table id="13" parent="2" name="admin_login_log"/>
+    <table id="14" parent="2" name="admin_user"/>
+    <table id="15" parent="2" name="chat_room"/>
+    <table id="16" parent="2" name="user"/>
+    <view id="17" parent="2" name="view_chat">
+      <Comment>VIEW</Comment>
+    </view>
+    <column id="18" parent="13" name="adminID">
+      <Position>1</Position>
+      <DataType>int(10) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="19" parent="13" name="adminLoginTime">
+      <Position>2</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="20" parent="13" name="adminLoginIP">
+      <Position>3</Position>
+      <DataType>varchar(35)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="21" parent="13" name="FK_adminID">
+      <ColNames>adminID</ColNames>
+    </index>
+    <foreign-key id="22" parent="13" name="FK_adminID">
+      <ColNames>adminID</ColNames>
+      <RefSchemaName>dbchattingroom</RefSchemaName>
+      <RefTableName>admin_user</RefTableName>
+      <RefColNames>aID</RefColNames>
+    </foreign-key>
+    <column id="23" parent="14" name="aID">
+      <Position>1</Position>
+      <DataType>int(10) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="24" parent="14" name="aName">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="25" parent="14" name="aPassword">
+      <Position>3</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="26" parent="14" name="aSalt">
+      <Position>4</Position>
+      <DataType>char(4)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="27" parent="14" name="aName">
+      <ColNames>aName</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="28" parent="14" name="PRIMARY">
+      <ColNames>aID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="29" parent="14" name="aName">
+      <ColNames>aName</ColNames>
+      <UnderlyingIndexName>aName</UnderlyingIndexName>
+    </key>
+    <column id="30" parent="15" name="cID">
+      <Position>1</Position>
+      <DataType>bigint(20) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="31" parent="15" name="cContent">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="32" parent="15" name="cSendTime">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="33" parent="15" name="cType">
+      <Position>5</Position>
+      <DataType>enum(&apos;0&apos;, &apos;1&apos;, &apos;2&apos;, &apos;3&apos;)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="34" parent="15" name="cSendByUID">
+      <Position>6</Position>
+      <DataType>bigint(20) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="15" name="cIsReply">
+      <Position>7</Position>
+      <DataType>enum(&apos;0&apos;, &apos;1&apos;)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="36" parent="15" name="ReplyCID">
+      <Position>8</Position>
+      <DataType>bigint(20) unsigned|0</DataType>
+    </column>
+    <column id="37" parent="15" name="cStatus">
+      <Position>9</Position>
+      <DataType>enum(&apos;0&apos;, &apos;1&apos;)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="38" parent="15" name="cSendIP">
+      <Position>4</Position>
+      <DataType>varchar(35)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="39" parent="15" name="FK_SendByUID">
+      <ColNames>cSendByUID</ColNames>
+    </index>
+    <key id="40" parent="15" name="PRIMARY">
+      <ColNames>cID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="41" parent="15" name="FK_SendByUID">
+      <ColNames>cSendByUID</ColNames>
+      <RefSchemaName>dbchattingroom</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>uID</RefColNames>
+      <OnDelete>no-action</OnDelete>
+    </foreign-key>
+    <column id="42" parent="16" name="uID">
+      <Position>1</Position>
+      <DataType>bigint(20) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="43" parent="16" name="uName">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="44" parent="16" name="uPassword">
+      <Position>3</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="45" parent="16" name="uGender">
+      <Position>4</Position>
+      <DataType>enum(&apos;male&apos;, &apos;female&apos;)|0</DataType>
+    </column>
+    <column id="46" parent="16" name="uEmail">
+      <Position>5</Position>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="47" parent="16" name="uSign">
+      <Position>6</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="48" parent="16" name="uPic">
+      <Position>7</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="49" parent="16" name="uStatus">
+      <Position>8</Position>
+      <DataType>enum(&apos;0&apos;, &apos;1&apos;)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <index id="50" parent="16" name="uName">
+      <ColNames>uName</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="51" parent="16" name="PRIMARY">
+      <ColNames>uID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="52" parent="16" name="uName">
+      <ColNames>uName</ColNames>
+      <UnderlyingIndexName>uName</UnderlyingIndexName>
+    </key>
+    <column id="53" parent="17" name="cID">
+      <Position>1</Position>
+      <DataType>bigint(20) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="54" parent="17" name="cContent">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="55" parent="17" name="cSendByUID">
+      <Position>3</Position>
+      <DataType>bigint(20) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="56" parent="17" name="userName">
+      <Position>4</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="57" parent="17" name="cSendTime">
+      <Position>5</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="58" parent="17" name="cSendIP">
+      <Position>6</Position>
+      <DataType>varchar(35)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="17" name="cType">
+      <Position>7</Position>
+      <DataType>enum(&apos;0&apos;, &apos;1&apos;, &apos;2&apos;, &apos;3&apos;)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="60" parent="17" name="cIsReply">
+      <Position>8</Position>
+      <DataType>enum(&apos;0&apos;, &apos;1&apos;)|0</DataType>
+    </column>
+    <column id="61" parent="17" name="ReplyCID">
+      <Position>9</Position>
+      <DataType>bigint(20) unsigned|0</DataType>
+    </column>
+    <column id="62" parent="17" name="cStatus">
+      <Position>10</Position>
+      <DataType>enum(&apos;0&apos;, &apos;1&apos;)|0</DataType>
+    </column>
+  </database-model>
+</dataSource>
